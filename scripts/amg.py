@@ -188,8 +188,7 @@ def get_amg_kwargs(args):
         "crop_n_points_downscale_factor": args.crop_n_points_downscale_factor,
         "min_mask_region_area": args.min_mask_region_area,
     }
-    amg_kwargs = {k: v for k, v in amg_kwargs.items() if v is not None}
-    return amg_kwargs
+    return {k: v for k, v in amg_kwargs.items() if v is not None}
 
 
 def main(args: argparse.Namespace) -> None:
@@ -227,7 +226,7 @@ def main(args: argparse.Namespace) -> None:
             os.makedirs(save_base, exist_ok=False)
             write_masks_to_folder(masks, save_base)
         else:
-            save_file = save_base + ".json"
+            save_file = f"{save_base}.json"
             with open(save_file, "w") as f:
                 json.dump(masks, f)
     print("Done!")

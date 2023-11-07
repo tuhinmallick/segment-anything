@@ -86,8 +86,7 @@ class SamOnnxModel(nn.Module):
 
         orig_im_size = orig_im_size.to(torch.int64)
         h, w = orig_im_size[0], orig_im_size[1]
-        masks = F.interpolate(masks, size=(h, w), mode="bilinear", align_corners=False)
-        return masks
+        return F.interpolate(masks, size=(h, w), mode="bilinear", align_corners=False)
 
     def select_masks(
         self, masks: torch.Tensor, iou_preds: torch.Tensor, num_points: int
